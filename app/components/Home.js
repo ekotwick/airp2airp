@@ -1,15 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
-const Home = () => (
-	<div className='home'>
-		<h1> AEIDE </h1>
-		<h2> Type Homer verse </h2>
-		<h3> The app parses the metric elements and scans the lines for you</h3>
-		<h3>
-			<Link to='scansion' >Try it</Link>
-		</h3>
-	</div>
-);
+import TextInput from './TextInput';
+import TextOutput from './TextOutput';
+import Header from './Header';
 
-export default Home;
+export default class Home extends React.Component {
+
+	constructor(props) {
+		super(props)
+		this.state = {}
+	}
+
+	render() {
+		return (
+			<div className='container-fluid'>
+				<Header />
+				<div className='row'>
+					<div className='col-lg-2'>
+						<TextInput />
+					</div>
+					<div className='col-lg-9'>
+						<TextOutput />
+					</div>
+				</div>
+			</div>
+	)}
+}
