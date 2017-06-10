@@ -1,8 +1,5 @@
 'use strict';
 
-const _forEach = require('lodash').forEach;
-const USAirportsData = require('./prepAirportData').USAirportsData;
-
 export class TrieNode {
 	constructor(char='') {
 		this.value = char;

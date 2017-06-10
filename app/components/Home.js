@@ -18,7 +18,6 @@ export default class Home extends React.Component {
 				<Header />
 				<div className='row'>
 					<Airport1 />
-					<Airport2 />
 				</div>
 			</div>
 	)}
