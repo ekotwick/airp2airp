@@ -28,10 +28,10 @@ export function TextInput (props) {
 				className='form-control input' 
 				placeholder='Enter Airport Name' 
 				onChange={ textEnter } 
-				list='airports'
+				list='airportsSecond'
 			/>
 			<div />
-			<datalist id='airports'>
+			<datalist id='airportsSecond'>
 				<select onChange= {textEnter}>
 					{ displayNames() }
 				</select>
