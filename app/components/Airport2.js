@@ -1,18 +1,60 @@
 'use strict';
 
 import React from 'react';
+import { getAirportSet } from '../reducers/SecondAirportSet';
+import { getAirportCoords } from '../reducers/SecondCoordinates';
+import { connect } from 'react-redux';
 
-export default function TextInput (props) {
+export function TextInput (props) {
 
 	const textEnter = e => {
-		props.setText(e.target.value);
+		let input = e.target.value.split(',')[0];
+		let trie = props.airports;
+		props.dispatchCoordinates(input, trie);
+		props.dispatchAirportSet(input, trie);
+	}
+
+	const displayNames = () => {
+		let names = props.secondAPSet;
+		return names.map((name, i) => (
+			<option key={i} value={name}>{name}</option>
+		))
 	}
 
 	return (
-		<textarea 
-			className='form-control input' 
-			placeholder='Enter Airport Name' 
-			onChange={ textEnter } 
-		/>
+		<div>
+			<input
+				type='text' 
+				className='form-control input' 
+				placeholder='Enter Airport Name' 
+				onChange={ textEnter } 
+				list='airports'
+			/>
+			<div />
+			<datalist id='airports'>
+				<select onChange= {textEnter}>
+					{ displayNames() }
+				</select>
+			</datalist>
+		</div>
 	)
 }
+
+const mapStateToProps = state => ({
+	airports: state.airports,
+	secondAPSet: state.secondAPSet
+});
+
+
+const mapDispatchToProps = dispatch => {
+	return {
+		dispatchAirportSet: (input, trie) => {
+			dispatch(getAirportSet(input, trie));
+		},
+		dispatchCoordinates: (input, trie) => {
+			dispatch(getAirportCoords(input, trie));
+		}
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TextInput);

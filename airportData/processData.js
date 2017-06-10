@@ -7,7 +7,14 @@ const USAirports = allAirports.split('\n').filter(ap => ap.includes('UNITED STAT
 const cleanAirportData = array => {
 	return array.map(a => {
 		let toReturn = a.slice(2,-1);
-		toReturn = toReturn.replace(/Intl/i, 'International').replace(/Arpt/i, 'Airport').replace(/St /i, 'St. ');
+		toReturn = toReturn
+			.replace(/(Apt)$/, 'Airport')
+			.replace(/Intl/i, 'International')
+			.replace(/Arpt/i, 'Airport')
+			.replace(/St /i, 'St. ')
+			.replace(/Cnty/i, 'County')
+			.replace(/Natl/i, 'National')
+			.replace(/Aprt/i, 'Airport');
 		return toReturn;
 	});
 };
