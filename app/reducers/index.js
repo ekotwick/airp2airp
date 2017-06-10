@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
 import airportReducer from './AirportData';
-import firstAPReducer from './Airport1';
+import firstAirportReducer from './inputOne';
 
 export default combineReducers({ 
 	airports: airportReducer,
-	firstAirport: firstAPReducer
+	firstAPSet: firstAirportReducer
 });
