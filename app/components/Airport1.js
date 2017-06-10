@@ -16,8 +16,10 @@ export function TextInput (props) {
 			className='form-control input' 
 			placeholder='Enter Airport Name' 
 			onChange={ textEnter } 
-			list='languages'
+			list='airports'
 		/>
+		<div />
+		<datalist id='airports'>{}</datalist>
 	)
 }
 
