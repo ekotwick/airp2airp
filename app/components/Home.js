@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import TextInput from './TextInput';
-import TextOutput from './TextOutput';
+import Airport1 from './Airport1';
+import Airport2 from './Airport2';
 import Header from './Header';
 
 export default class Home extends React.Component {
@@ -17,12 +17,8 @@ export default class Home extends React.Component {
 			<div className='container-fluid'>
 				<Header />
 				<div className='row'>
-					<div className='col-lg-2'>
-						<TextInput />
-					</div>
-					<div className='col-lg-9'>
-						<TextOutput />
-					</div>
+					<Airport1 />
+					<Airport2 />
 				</div>
 			</div>
 	)}
