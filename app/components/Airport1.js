@@ -22,11 +22,11 @@ export function TextInput (props) {
 	}
 
 	return (
-		<div>
+		<div className='airport'>
 			<input
 				type='text' 
 				className='form-control input' 
-				placeholder='Enter Airport Name' 
+				placeholder='Enter first airport name' 
 				onChange={ textEnter } 
 				list='airportsFirst'
 			/>

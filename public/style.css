@@ -1,65 +1,41 @@
 *:focus {
-  outline: none;
-}
-
-.footer {
-	position: absolute;
-	bottom: 20px;
-	text-align: center;
-}
-
-.campusPlural {
-	flex-direction: 'row';
-	flex-wrap: 'wrap';
-}
-
-.spacer {
-  padding: 10px;
+	outline: none;
 }
 
 .input {
-  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
-  font-size: 20px;
-  border: none;
-  outline: none;
-  resize: none;
+	font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+	font-size: 1.5vw;
+	border: none;
+	outline: none;
+	resize: none;
+}
+
+.airport {
+	padding-top: .5vw;
+	padding-bottom: .5vw;
+}
+
+.input-output {
+	background-color: white;
+	height: 15vw;
 }
 
 .output {
-  font-family: 'Ubuntu Mono', monospace;
-  font-size: 26px;
-}
-
-ul {
-  display: table;
-  width: 100%;
-  padding: 0;
-  list-style-type: none;
-}
-
-li {
-  display: table-row;
-  width: 100%;
-}
-
-span {
-  display: table-cell;
+	margin-top: 5vw;
+	font-size: 2vw;
 }
 
 body {
-  background-color: #efefef;
+	background-color: #efefef;
 }
 
 pre {
-  background-color: white;
-  border: none;
+	background-color: white;
+	border: none;
+	text-align: center;
+	height: 100%;
 }
 
 h1 {
-  padding: 50px;
-  font-size: 75px;
-}
-
-h2 {
-  font-size: 40px;
+	font-size: 2.75vw;
 }

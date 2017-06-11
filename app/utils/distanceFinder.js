@@ -1,11 +1,17 @@
 'use strict';
 
-'use strict';
-
 export class LatLon {
 	constructor(coordinates) {
 		this.latitude = coordinates.latitude;
 		this.longitude = coordinates.longitude;
+		this.point;
+		this.distance; 
+	}
+
+	getDistance(metric='nautical miles', precision=2) {
+		let distanceInMetric = this.convertTo(metric, this.distance);
+		let roundedDistance = this.roundOrPadToAmount(distanceInMetric, precision);
+		return `${roundedDistance} ${metric}`
 	}
 
 	toRadians(val) {
@@ -15,21 +21,26 @@ export class LatLon {
 	convertTo(type, distance) {
 		let d = distance;
 		switch(type) {
-			case 'nautical': 
+			case 'nautical miles': 
 				d = d * 0.000539957;
 				return d;
 
-			case 'mile': 
+			case 'miles': 
 				d = d * 0.000621371;
 				return d;
 
-			case 'kilometer':
+			case 'kilometers':
 				d = d / 1000;
 				return d;
 		}
 	}
 
-	distanceTo(point, conversion='nautical', radius=6371000) {
+	roundOrPadToAmount(float, amount) {
+		return float.toFixed(amount);
+	}
+
+	calculateDistance(point, radius=6371000) {
+		this.point = point;
 		const R = radius;
 		const lat1 = this.latitude;
 		const lon1 = this.longitude;
@@ -46,6 +57,8 @@ export class LatLon {
 
 		let distance = R * c;
 
-		return this.convertTo(conversion, distance);
+		this.distance = distance;
+
+		return this; // for chaining
 	}
 }

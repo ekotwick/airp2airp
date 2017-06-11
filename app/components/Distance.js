@@ -8,20 +8,22 @@ export function Distance (props) {
 
 	const displayDistance = () => {
 		if (Object.keys(props.firstCoords).length && Object.keys(props.secondCoords).length) {
-			console.log(props.firstCoords);
-			console.log(props.secondCoords);
 			let firstAP = new LatLon(props.firstCoords);
 			let secondAP = new LatLon(props.secondCoords);
-			return firstAP.distanceTo(secondAP);
+			return firstAP.calculateDistance(secondAP).getDistance();
 		} else {
-			console.log('no length');
+			return
 		}
 	}
 
 	return (
-		<pre>
-			{ displayDistance() }
-		</pre>
+		<div className='output'>
+			<pre>
+				<span className='output'>
+					{ displayDistance() }
+				</span>
+			</pre>
+		</div>
 	)
 }
 
