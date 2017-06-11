@@ -10,7 +10,7 @@ const reducer = (state={}, action) => {
 	return state;
 }
 
-export const setFirstCoordinates = coordinates => ({
+export const setSecondCoordinates = coordinates => ({
 	type: SET_SECOND_COORDINATES,
 	coordinates
 });
@@ -20,7 +20,7 @@ export const getAirportCoords = (input, trie) =>
 		let node = trie.getNode(input);
 		if (node.completesName()) {
 			let coordinates = node.getData().coordinates;
-			dispatch(setFirstCoordinates(coordinates))
+			dispatch(setSecondCoordinates(coordinates))
 		} else {
 			return
 		}
