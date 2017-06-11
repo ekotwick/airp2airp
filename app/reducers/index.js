@@ -6,10 +6,12 @@ import firstCoordsReducer from './FirstCoordinates';
 import secondAirportReducer from './SecondAirportSet';
 import secondCoordsReducer from './SecondCoordinates';
 
-export default combineReducers({ 
+const rootReducer = combineReducers({ 
 	airports: airportReducer,
 	firstAPSet: firstAirportReducer,
 	firstCoords: firstCoordsReducer,
 	secondAPSet: secondAirportReducer,
 	secondCoords: secondCoordsReducer
 });
+
+export default rootReducer;
