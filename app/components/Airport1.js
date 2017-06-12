@@ -1,11 +1,14 @@
 'use strict';
 
+// react
 import React from 'react';
-import { getAirportSet } from '../reducers/FirstAirportSet';
-import { getAirportCoords } from '../reducers/FirstCoordinates';
 import { connect } from 'react-redux';
 
-export function TextInput (props) {
+// components
+import { getAirportSet } from '../reducers/FirstAirportSet';
+import { getAirportCoords } from '../reducers/FirstCoordinates';
+
+export function Airport1 (props) {
 
 	const textEnter = e => {
 		let input = e.target.value.split(',')[0];
@@ -57,4 +60,4 @@ const mapDispatchToProps = dispatch => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TextInput);
+export default connect(mapStateToProps, mapDispatchToProps)(Airport1);

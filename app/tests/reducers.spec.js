@@ -36,7 +36,7 @@ describe('SecondAirportSet', function() {
 	it('should create an action for second set of airports for autocomplete', function() {
 		const set = [];
 		const expectedAction = {
-			type: 'AIRPORT_SET_ONE',
+			type: 'AIRPORT_SET_TWO',
 			set
 		};
 		expect(setSecondAirportSet(set)).to.be.deep.equal(expectedAction);
@@ -61,6 +61,6 @@ describe('SecondCoordinates', function() {
 			type: 'SET_SECOND_COORDINATES',
 			coordinates
 		};
-		expect(setFirstCoordinates(coordinates)).to.be.deep.equal(expectedAction);
+		expect(setSecondCoordinates(coordinates)).to.be.deep.equal(expectedAction);
 	});
 });

@@ -1,6 +1,11 @@
+'use strict'
+
+// react
 import React from 'react';
 import { connect } from 'react-redux'; 
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+
+// components
 import store from './store';
 import Home from './components/Home';
 import Root from './components/Root';

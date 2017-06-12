@@ -1,7 +1,11 @@
+'use strict'
+
+// react
 import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-bootstrap';
-import Paper from 'material-ui/Paper';
+
+// components
 import Airport1 from './Airport1';
 import Airport2 from './Airport2';
 import Distance from './Distance';
@@ -11,7 +15,6 @@ export default class Home extends React.Component {
 
 	constructor(props) {
 		super(props)
-		this.state = {}
 	}
 
 	render() {
@@ -32,9 +35,4 @@ export default class Home extends React.Component {
 			</div>
 		)}
 
-}
-
-const styles = {
-	borderStyle: 'solid',
-	borderColor: 'white',
 }

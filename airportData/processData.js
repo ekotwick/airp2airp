@@ -35,4 +35,4 @@ const USAirportsData = USAirports.map(ap => {
 	return generateDataObject(ap.split(','));
 });
 
-module.exports = { USAirportsData };
+module.exports = { USAirportsData, generateDataObject };

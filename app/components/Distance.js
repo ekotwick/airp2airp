@@ -1,8 +1,11 @@
 'use strict';
 
+// react
 import React from 'react';
-import { LatLon } from '../utils/distanceFinder';
 import { connect } from 'react-redux';
+
+// utils
+import { LatLon } from '../utils/distanceFinder';
 
 export function Distance (props) {
 

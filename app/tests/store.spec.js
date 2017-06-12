@@ -3,7 +3,7 @@
 import { expect } from 'chai';
 
 // other utilities
-import { USAirportsData } from '../../airportData/processData';
+import { generateDataObject } from '../../airportData/processData';
 import { AirportTrie } from '../utils/airportTrie';
 
 // components
@@ -23,8 +23,11 @@ describe ('Store', () => {
 	('ANE', 'Marce Arpt', 'ANE', 'Angers', 'FRANCE', 'FR', '1', '47.5603', '-0.312222', 1, 'true'),
 	('AND', 'Anderson Arpt', 'AND', 'Anderson', 'UNITED STATES', 'US', '-5', '34.494583', '-82.709389', 1, 'true'),
 	('ANC', 'Anchorage Intl Arpt', 'ANC', 'Anchorage', 'UNITED STATES', 'US', '-9', '61.174361', '-149.996361', 1, 'true')`
-	const processedSampleData = USAirportsData(rawSampleData);
-	airportsTest.insertAirportData(rawSampleData);
+	let arrayOfData = rawSampleData.split('\n').filter(ap => ap.includes('UNITED STATES') && !ap.includes('Bus Service'))
+	const processedSampleData = arrayOfData.map(ap => {
+		return generateDataObject(ap.split(','));
+	});
+	airportsTest.insertAirportData(processedSampleData);
 	let firstAPSetTest = ['Ainsworth Minicipal Airport, Ainsworth','Aiken Municipal Airport, Aiken','Air Terminal Airport, Sebring']
 	let secondAPSetTest = ['Detroit City Airport, Detroit','Detroit Metro Wayne County Airport, Detroit'];
 	let firstCoordsTest = {
@@ -58,7 +61,7 @@ describe ('Store', () => {
 	describe('AirportData reducer', () => {
 		it('should place a Trie in the store', () => {
 			testStore.dispatch({type: 'SET_AIRPORT_DATA', data: airportsTest});
-			const newState = testStore.getState();
+			let newState = testStore.getState();
 			expect(newState.airports).to.be.deep.equal(airportsTest);
 			expect(newState.airports).to.be.instanceof(AirportTrie);
 		});
@@ -66,24 +69,24 @@ describe ('Store', () => {
 
 	describe('FirstAirportSet reducer', () => {
 		it('should place an array of airports in the store', () => {
-			testStore.dispatch({type: 'AIRPORT_SET_ONE', data: firstAPSetTest});
-			const newState = testStore.getState();
+			testStore.dispatch({type: 'AIRPORT_SET_ONE', set: firstAPSetTest});
+			let newState = testStore.getState();
 			expect(newState.firstAPSet).to.be.deep.equal(firstAPSetTest);
 		});
 	});
 
 	describe('SecondAirportSet reducer', () => {
 		it('should place an array of airports in the store', () => {
-			testStore.dispatch({type: 'AIRPORT_SET_TWO', data: secondAPSetTest});
-			const newState = testStore.getState();
+			testStore.dispatch({type: 'AIRPORT_SET_TWO', set: secondAPSetTest});
+			let newState = testStore.getState();
 			expect(newState.secondAPSet).to.be.deep.equal(secondAPSetTest);
 		});
 	});
 
 	describe('FirstCoordinates reducer', () => {
 		it('should place an object of airport coordinates in the store', () => {
-			testStore.dispatch({type: 'SET_FIRST_COORDINATES', data: firstCoordsTest});
-			const newState = testStore.getState();
+			testStore.dispatch({type: 'SET_FIRST_COORDINATES', coordinates: firstCoordsTest});
+			let newState = testStore.getState();
 			expect(newState.firstCoords).to.be.deep.equal(firstCoordsTest);
 			expect(newState.firstCoords).to.have.own.property('latitude');
 			expect(newState.firstCoords).to.have.own.property('longitude');
@@ -93,8 +96,8 @@ describe ('Store', () => {
 
 	describe('SecondCoordinates reducer', () => {
 		it('should place an object of airport coordinates in the store', () => {
-			testStore.dispatch({type: 'SET_SECOND_COORDINATES', data: secondCoordsTest});
-			const newState = testStore.getState();
+			testStore.dispatch({type: 'SET_SECOND_COORDINATES', coordinates: secondCoordsTest});
+			let newState = testStore.getState();
 			expect(newState.secondCoords).to.be.deep.equal(secondCoordsTest);
 			expect(newState.secondCoords).to.have.own.property('latitude');
 			expect(newState.secondCoords).to.have.own.property('longitude');

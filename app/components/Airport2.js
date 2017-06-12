@@ -5,7 +5,7 @@ import { getAirportSet } from '../reducers/SecondAirportSet';
 import { getAirportCoords } from '../reducers/SecondCoordinates';
 import { connect } from 'react-redux';
 
-export function TextInput (props) {
+export function Airport2 (props) {
 
 	const textEnter = e => {
 		let input = e.target.value.split(',')[0];
@@ -57,4 +57,4 @@ const mapDispatchToProps = dispatch => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TextInput);
+export default connect(mapStateToProps, mapDispatchToProps)(Airport2);

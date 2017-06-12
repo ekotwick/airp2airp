@@ -1,3 +1,6 @@
+'use strict';
+
+// utils
 import axios from 'axios';
 import { AirportTrie } from '../utils/airportTrie';
 

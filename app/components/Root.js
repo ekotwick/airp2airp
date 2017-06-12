@@ -1,3 +1,6 @@
+'use strict'
+
+// react
 import React from 'react';
 
 const Root = ({ children }) => (
