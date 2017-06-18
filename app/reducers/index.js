@@ -7,11 +7,11 @@ import secondAirportReducer from './SecondAirportSet';
 import secondCoordsReducer from './SecondCoordinates';
 
 const rootReducer = combineReducers({ 
-	airports: airportReducer,
-	firstAPSet: firstAirportReducer,
-	firstCoords: firstCoordsReducer,
-	secondAPSet: secondAirportReducer,
-	secondCoords: secondCoordsReducer
+  airports: airportReducer,
+  firstAPSet: firstAirportReducer,
+  firstCoords: firstCoordsReducer,
+  secondAPSet: secondAirportReducer,
+  secondCoords: secondCoordsReducer
 });
 
 export default rootReducer;

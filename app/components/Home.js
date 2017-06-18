@@ -13,26 +13,26 @@ import Header from './Header';
 
 export default class Home extends React.Component {
 
-	constructor(props) {
-		super(props)
-	}
+  constructor(props) {
+    super(props)
+  }
 
-	render() {
-		return (
-			<div className='container-fluid'>
-					<Col lg={12}>
-						<div className='row input-output'>
-							<Col lg={8}>
-									<Header/>
-									<Airport1 />
-									<Airport2 />
-							</Col>
-							<Col lg={4}>
-									<Distance />
-							</Col>
-						</div>
-				</Col>
-			</div>
-		)}
+  render() {
+    return (
+      <div className='container-fluid'>
+          <Col lg={12}>
+            <div className='row input-output'>
+              <Col lg={8}>
+                  <Header/>
+                  <Airport1 />
+                  <Airport2 />
+              </Col>
+              <Col lg={4}>
+                  <Distance />
+              </Col>
+            </div>
+        </Col>
+      </div>
+    )}
 
 }

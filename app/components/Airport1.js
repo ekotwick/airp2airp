@@ -10,54 +10,54 @@ import { getAirportCoords } from '../reducers/FirstCoordinates';
 
 export function Airport1 (props) {
 
-	const textEnter = e => {
-		let input = e.target.value.split(',')[0];
-		let trie = props.airports;
-		props.dispatchCoordinates(input, trie);
-		props.dispatchAirportSet(input, trie);
-	}
+  const textEnter = e => {
+    let input = e.target.value.split(',')[0];
+    let trie = props.airports;
+    props.dispatchCoordinates(input, trie);
+    props.dispatchAirportSet(input, trie);
+  }
 
-	const displayNames = () => {
-		let names = props.firstAPSet;
-		return names.map((name, i) => (
-			<option key={i} value={name}>{name}</option>
-		))
-	}
+  const displayNames = () => {
+    let names = props.firstAPSet;
+    return names.map((name, i) => (
+      <option key={i} value={name}>{name}</option>
+    ))
+  }
 
-	return (
-		<div className='airport'>
-			<input
-				type='text' 
-				className='form-control input' 
-				placeholder='Enter first airport name' 
-				onChange={ textEnter } 
-				list='airportsFirst'
-			/>
-			<div />
-			<datalist id='airportsFirst'>
-				<select onChange= {textEnter}>
-					{ displayNames() }
-				</select>
-			</datalist>
-		</div>
-	)
+  return (
+    <div className='airport'>
+      <input
+        type='text' 
+        className='form-control input' 
+        placeholder='Enter first airport name' 
+        onChange={ textEnter } 
+        list='airportsFirst'
+      />
+      <div />
+      <datalist id='airportsFirst'>
+        <select onChange= {textEnter}>
+          { displayNames() }
+        </select>
+      </datalist>
+    </div>
+  )
 }
 
 const mapStateToProps = state => ({
-	airports: state.airports,
-	firstAPSet: state.firstAPSet
+  airports: state.airports,
+  firstAPSet: state.firstAPSet
 });
 
 
 const mapDispatchToProps = dispatch => {
-	return {
-		dispatchAirportSet: (input, trie) => {
-			dispatch(getAirportSet(input, trie));
-		},
-		dispatchCoordinates: (input, trie) => {
-			dispatch(getAirportCoords(input, trie));
-		}
-	};
+  return {
+    dispatchAirportSet: (input, trie) => {
+      dispatch(getAirportSet(input, trie));
+    },
+    dispatchCoordinates: (input, trie) => {
+      dispatch(getAirportCoords(input, trie));
+    }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Airport1);

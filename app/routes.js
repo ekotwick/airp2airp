@@ -12,16 +12,16 @@ import Root from './components/Root';
 import { getAirportData } from './reducers/AirportData';
 
 const fetchAirports = () => {
-	console.log('here');
-	store.dispatch(getAirportData());
+  console.log('here');
+  store.dispatch(getAirportData());
 }
 
 const Routes = () => (
-	<Router history={hashHistory}>
-		<Route path='/' component={ Root } >
-			<IndexRoute component={ Home } onEnter={ fetchAirports }/>
-		</Route>
-	</Router>
+  <Router history={hashHistory}>
+    <Route path='/' component={ Root } >
+      <IndexRoute component={ Home } onEnter={ fetchAirports }/>
+    </Route>
+  </Router>
 );
 
 const mapState = null;
