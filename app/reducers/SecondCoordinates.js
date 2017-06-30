@@ -18,7 +18,7 @@ export const setSecondCoordinates = coordinates => ({
 export const getAirportCoords = (input, trie) => 
   dispatch => {
     let node = trie.getNode(input);
-    if (node.completesName()) {
+    if (node.completesName()) { // we only want to dispatch to the store when the string input represents a name of an aiport;
       let coordinates = node.getData().coordinates;
       dispatch(setSecondCoordinates(coordinates))
     } else {

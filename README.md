@@ -1,29 +1,36 @@
-## Moat Challenge #2a by Edmond Kotwick
+## Distance Calculator —— Airport to Airport
 
-Completed in JavaScript with Node, Express, and React tech stack.
+#### Running the app:
 
-To install npm dependencies, enter into the command line: `npm install`
+This is a Node.js app that calculates the distance between any two US airports in nautical miles and supports an airport search with autocomplete. To run the app locally, run the following commands on the command line:
+  ```
+  npm install
+  npm run build
+  npm start  
+  ```
 
-To view app at a local host: 
-1) Run webpack by entering into the command line: `npm run build`
-2) Start server by entering into the command line: `npm start`
-3) In browser go to: `http://localhost:1337/#/`
+Then go to http://localhost:1337/ in your browser.
 
-To run test suite, enter into the command line: `npm run test`
+#### Techs used in the app:
 
-#### Data Flow
+The app is a single-page Javascript application that runs on Node using the express.js module. The front-end views are built in React and Redux (and several supporting libraries like react-router or react-dom) and are bundled together with Webpack. Babel transpiles ES6 to ES5 for browser compatibility. 
 
-* When a user enters `http://localhost:1337/#/`, a GET request is made to the app's API, which sends to the store all airport data (data at: airportData/data.js)
-* For the present purposes, airport data is stored as a string in a js file. Upon retrieval, several algorithms clean up the data. (Data taken from https://gist.githubusercontent.com/tanerdogan/10103011/raw/1b7cf2b5dfcb9be242e7cc8fbc1b95950b16becb/airports.sql)
-* When the client side receives the airport data, the data is placed into the redux store as a trie data structure (trie at: app/utils/airportTrie); the trie enables autocomplete functionality
-* When a user enters a key into one of the input fields, the target value of the input field——a prefix——is used to traverse through the trie and retrieve all possible suffixes of the input (see the `autocomplete` and `getAllSuffixes` methods on the trie)
-* When a user enters the full name of the airport or selects from the options provided by autocomplete, the coordinates of that airport are loaded into the store as an object with two properties, `latitude` and `longitude`.
-* When the user enters two full airport names, the `Distance` component (app/components/Distance.js) pulls the two data objects down from the store and passes them into a distance-finding algorithm (app/utils/distanceFinder.js); the return value is then displayed to the screen
+The core functionality of the app——the search/autocomplete and the distance calculator algorithm——are hand-built. They are located at `app/utils`. The distance algorithm is an implementation of the "haversine" formula. The airport search/autocomplete was made possible through an implementation of the Trie data structure: at each user character stroke a new string is created, which is then searched for within the Trie; an autocomplete method then supplies all suffixes for the given string through a depth-first recursive traversal over the relevant sub-Trie. 
 
-#### To-Dos
+#### The API 
 
-* At present, when a user types in even a single keyword, e.g., 'S', all suffixes of 'S' are available to autocomplete the word. This seems excessive. In the future I would like to build in a feature that triggers the autocomplete functionality only when a minimum number of characters are entered, perhaps 3.
-* Integrate Google Maps API so that a user can see the physical location of the airport 
-* Sync a database and load the airport data into the database
-* The present airport data is incomplete in two senses: first, for some of the airports no coordinates are provided. This data can be provided using Google Maps API: if a user requests information about an airport for which there are no coordinates, a call can be made to google maps' api using the name of the airport, the coordinates can be returned and in turn loaded into the database
-* The second sense in which the present airport data is incomplete is this: currently there is data for roughly 2,500 US airports. However, there are roughly 15,000 US airports, at least as acknowledged by the FAA. To complete airport data, it looks like this site will need to be scrapped for data: http://www.aviationacres.com/USAirports.asp 
+The API for this app is very simple, since all it needs to do is serve up to the client the catalogue of US airports. This is what the route at `server/api.js` does. 
+
+This app was not built to be connected to a database, though it could if further types of data needed to be stored. A pseudo-database is provided in the directory `airportData`, which holds data on roughly 8,800 airports worldwide and some algorithms for cleaning up the data and filtering for only US airports. In addition to the names of the airports (which are kept in distributed form as nodes in the Trie), the Trie also stores coordinate data for each airport, which is necessary for the calculator function. 
+
+When the user goes to http://localhost:1337/, the API call is automatically made and all data is served up to the client and kept in the redux store in a Trie.
+
+#### React/React-Redux
+
+The application's main page has four elements: an input field for the first airport, an input field for the second airport, an output field for the calculated distance, and a header. Each of these elements is represented as its own react component; they are woven together at `app/components/Home.js`. The first three components are all connected to a redux store, so React will call for a re-render if the reducers to which each component is connected undergoes a change. 
+
+As stated in the previous section, when the user comes to the app, a Trie holding all airport names is set in the redux store. When a user enters characters into an input field, the string formed by those characters is dispatched to the redux store, where it triggers a calling of the `autocomplete` method on the Trie kept in the store (for this logic, see for example `app/reducers/FirstAirportSet`). `autocomplete` generates an array of airport names, and this array is set in the redux store. 
+
+As stated just above, the input and output fields are all connected to the redux store. The inputs are connected to the store such that they will render a drop-down menu containing the names of all airports generated with the `autocomplete` method. A user can then either finish typing out the name or select from the list. 
+
+When the user selects an airport, the related coordinate data is taken from the Trie and set on the store (see for instance `app/reducers/FirstCoordinates`). When the store receives two sets of coordinates, the implementation of the haversine formula is triggered, and its return value is automatically displayed in the `Distance` component (see `app/components/Distance`).

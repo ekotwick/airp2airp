@@ -8,13 +8,13 @@ import { connect } from 'react-redux';
 export function Airport2 (props) {
 
   const textEnter = e => {
-    let input = e.target.value.split(',')[0];
+    let input = e.target.value.split(',')[0]; // the splitting is defensive: the autocomplete function returns a string of the form "name, location"; we don't want 'location' to cause any problems, so always ensure that it's lopped off
     let trie = props.airports;
     props.dispatchCoordinates(input, trie);
     props.dispatchAirportSet(input, trie);
   }
 
-  const displayNames = () => {
+  const displayNames = () => { // this builds the drop down list/autocomplete
     let names = props.secondAPSet;
     return names.map((name, i) => (
       <option key={i} value={name}>{name}</option>

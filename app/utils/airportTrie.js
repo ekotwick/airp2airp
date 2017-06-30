@@ -31,12 +31,12 @@ export class AirportTrie {
     this.root = new TrieNode();
   }
 
-  insertAirportData(data) {
+  insertAirportData(data) { // method for inserting an array of airport names + coordinates
     const self = this;
     data.forEach(d => self.insert(d.airportName, d.location, d.coordinates));
   }
 
-  insert(name, location, coordinates) {
+  insert(name, location, coordinates) { // method for inserting a single airport name + coordinates
     let node = this.root;
 
     for (let i = 0; i < name.length; i++) {
@@ -71,7 +71,7 @@ export class AirportTrie {
   }
 
   getNode(string) {
-    if (!this.find(string)) return;
+    if (!this.find(string)) return; // defensive coding to avoid hitting an error by returning undefined
     let node = this.root;
 
     for (let i = 0; i < string.length; i++) {
@@ -81,7 +81,7 @@ export class AirportTrie {
     return node;
   }
 
-  getAllSuffixes(node, suffix='', suffixes=[]) {
+  getAllSuffixes(node, suffix='', suffixes=[]) { // get all suffixes of a specified node
     if (!node) return;
     let allSuffixes = suffixes;
 
@@ -99,10 +99,10 @@ export class AirportTrie {
     return allSuffixes;
   }
 
-  autocomplete(string) {
+  autocomplete(string) { // get all suffixes with a string input — find node, then find suffixes of node
     let startingNode = this.getNode(string);
     let suffixesPlusData = this.getAllSuffixes(startingNode, string);
-    return suffixesPlusData.map(spd => {
+    return suffixesPlusData.map(spd => { 
       return `${spd.airportName}, ${spd.location}`;
     });
   }
